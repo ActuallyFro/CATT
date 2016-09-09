@@ -44,6 +44,7 @@ for CurDir in ${folders[*]}; do
       remotes=`cat .git/config | grep remote | grep "\[" | tr " " "\n" | grep "\]" | tr -d "\"\|\]"`
 
       if [[ "$remotes" == "" ]]; then
+         echo ""
          echo "NO REMOTES FOUND!"
       else
          for remote in ${remotes[*]}; do
