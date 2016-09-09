@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.1"
+Version="0.2.2"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -173,4 +173,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###): f1d9cedeba806b51de0d99559fce9fa9
+###md5 (less lines with ###): cde91189aadc0667e2e583d5e2ac5ef0
