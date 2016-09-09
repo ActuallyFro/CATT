@@ -43,12 +43,16 @@ for CurDir in ${folders[*]}; do
    if [[ "$CancelledCommit" == "false" ]] && [[ "`echo $Status | grep "Not a git repository"`" == "" ]];then
       remotes=`cat .git/config | grep remote | grep "\[" | tr " " "\n" | grep "\]" | tr -d "\"\|\]"`
 
-      for remote in ${remotes[*]}; do
-         echo ""
-         echo "Trying to Pull and Push $CurDir to: $remote"
-         git pull $remote master
-         git push $remote master
-      done
+      if [[ "$remotes" == "" ]]; then
+         echo "NO REMOTES FOUND!"
+      else
+         for remote in ${remotes[*]}; do
+            echo ""
+            echo "Trying to Pull and Push $CurDir to: $remote"
+            git pull $remote master
+            git push $remote master
+         done
+      fi
    fi
 
    cd ..
