@@ -76,7 +76,7 @@ if [[ "$1" == "--update" ]];then
 
    if [[ -f /tmp/junk$ToolName ]]; then
       lastVers="$Version"
-      newVers=`cat /tmp/junk$ToolName | grep "Version=" | tr "\"" "\n" | grep "\."`
+      newVers=`cat /tmp/junk$ToolName | grep "Version=" | grep -v "cat" | tr "\"" "\n" | grep "\."`
 
       lastVersHack=`echo "9$lastVers" | tr -d "."`  #LEADING ZERO HACK!
       newVersHack=`echo "9$newVers" | tr -d "."`  #LEADING ZERO HACK!
