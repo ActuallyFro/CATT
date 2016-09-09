@@ -86,6 +86,7 @@ if [[ "$1" == "--update" ]];then
          echo "Updating $ToolName to $newVers"
          chmod +x /tmp/junk$ToolName
          /tmp/junk$ToolName --install
+         rm /tmp/junk$ToolName
       else
          echo "You are up to date! ($lastVers)"
       fi
