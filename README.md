@@ -8,6 +8,7 @@ I'm lazy; I figure push out all the data and deal with it later
 
 Version Notes
 -------------
-0.1.0 - First Commit
+0.1.0 - First Commit(s)
+0.2.0 - Now will Args! (more importantly ... an installer)
 
 ![You know you want to ...](CATT.jpg)
