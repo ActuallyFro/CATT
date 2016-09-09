@@ -1,5 +1,7 @@
 #!/bin/bash
-Version="0.2.0"
+ToolName="CATT"
+Version="0.2.1"
+url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
 Commit ALL THE THINGS (CATT) v$Version
@@ -11,7 +13,8 @@ Other Options
 -------------
 --license - print license
 --version - print version number
---install - copy this script to /bin/CATT
+--install - copy this script to /bin/$ToolName
+--update  - update to the most recent GitHub commit
 EOF
 
 read -d '' License << EOF
@@ -46,13 +49,50 @@ fi
 if [[ "$1" == "--version" ]];then
    echo ""
    echo "Version: $Version"
-   echo "md5 (less ### lines): "`cat $0 | grep -v "###" | md5sum | awk '{print $1}'`
+   echo "md5 (less lines with ###): "`cat $0 | grep -v "###" | md5sum | awk '{print $1}'`
    exit
 fi
 
 if [[ "$1" == "--license" ]];then
    echo ""
    echo "$License"
+   exit
+fi
+
+if [[ "$1" == "--update" ]];then
+
+   echo ""
+
+   if [[ "`which wget`" != "" ]]; then
+      echo "Grabbing latest GitHub commit..."
+      wget $url -O /tmp/junk$ToolName
+
+   elif [[ "`which curl`" != "" ]]; then
+      echo "Grabbing latest GitHub commit...with curl...ew"
+      curl $url > /tmp/junk$ToolName
+   else
+      echo "... or I cant; Install wget or curl"
+   fi
+
+   if [[ -f /tmp/junk$ToolName ]]; then
+      lastVers="$Version"
+      newVers=`cat /tmp/junk$ToolName | grep "Version=" | tr "\"" "\n" | grep "\."`
+
+      lastVersHack=`echo "9$lastVers" | tr -d "."`  #LEADING ZERO HACK!
+      newVersHack=`echo "9$newVers" | tr -d "."`  #LEADING ZERO HACK!
+
+      echo ""
+      if [[ "$lastVersHack" -lt "$newVersHack" ]]; then
+         echo "Updating $ToolName to $newVers"
+         chmod +x /tmp/junk$ToolName
+         /tmp/junk$ToolName --install
+      else
+         echo "You are up to date! ($lastVers)"
+      fi
+   else
+      echo "Well ... that happened. (Check your Inet; the new $ToolName couldn't be grabbed!"
+   fi
+
    exit
 fi
 
@@ -64,10 +104,10 @@ if [[ "$1" == "--install" ]];then
    if [[ "$User" != "root" ]]; then
       echo "[WARNING] Currently NOT root!"
    fi
-   cp $0 /bin/CATT
-   Check=`ls /bin/CATT | wc -l`
+   cp $0 /bin/$ToolName
+   Check=`ls /bin/$ToolName | wc -l`
    if [[ "$Check" == "1" ]]; then
-      echo "CATT installed successfully!"
+      echo "$ToolName installed successfully!"
    fi
 
    exit
@@ -132,4 +172,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less last line): 6f9a24e04b35bae6cff04caa47cb8792
+###md5 (less lines with ###): f1d9cedeba806b51de0d99559fce9fa9

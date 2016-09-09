@@ -10,5 +10,6 @@ Version Notes
 -------------
 - 0.1.0 - First Commit(s)
 - 0.2.0 - Now will Args! (more importantly ... an installer)
+- 0.2.1 - Now will an updater!
 
 ![You know you want to ...](CATT.jpg)
