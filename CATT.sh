@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.2"
+Version="0.2.3"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -162,8 +162,8 @@ for CurDir in ${folders[*]}; do
          for remote in ${remotes[*]}; do
             echo ""
             echo "Trying to Pull and Push $CurDir to: $remote"
-            git pull $remote master
-            git push $remote master
+            git pull $remote --all
+            git push $remote --all
          done
       fi
    fi
