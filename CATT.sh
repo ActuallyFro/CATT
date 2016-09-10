@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.3"
+Version="0.2.4"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -159,10 +159,10 @@ for CurDir in ${folders[*]}; do
          echo ""
          echo "NO REMOTES FOUND!"
       else
+         echo "Fetching all..."
+         git fetch --all
          for remote in ${remotes[*]}; do
-            echo ""
-            echo "Trying to Pull and Push $CurDir to: $remote"
-            git pull $remote --all
+            echo "Trying to Push all branches from $CurDir to: $remote"
             git push $remote --all
          done
       fi
