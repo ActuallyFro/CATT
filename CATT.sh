@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.5"
+Version="0.2.6"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -160,6 +160,7 @@ for CurDir in ${folders[*]}; do
          echo ""
          echo "NO REMOTES FOUND!"
       else
+         echo ""
          echo "Fetching all..."
          git fetch --all
          for remote in ${remotes[*]}; do
@@ -167,6 +168,7 @@ for CurDir in ${folders[*]}; do
                echo "Trying to Merge $branch..."
                git merge $remote/$branch
             done
+            echo ""
             echo "Trying to Push all branches from $CurDir to: $remote"
             git push $remote --all
             git push $remote --tags
@@ -179,4 +181,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###): 8b7e58e79ed30b10845d8997fe59b9fa
+###md5 (less lines with ###): 244891e4216af7a3da866d58ced68a0d
