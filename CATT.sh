@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.6"
+Version="0.2.8"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -154,23 +154,24 @@ for CurDir in ${folders[*]}; do
 
    if [[ "$CancelledCommit" == "false" ]] && [[ "`echo $Status | grep "Not a git repository"`" == "" ]];then
       remotes=`cat .git/config | grep remote | grep "\[" | tr " " "\n" | grep "\]" | tr -d "\"\|\]"`
-      branches=`git branch | tr -d "*\| "`
 
       if [[ "$remotes" == "" ]]; then
          echo ""
          echo "NO REMOTES FOUND!"
       else
+         branches=`git branch | tr -d "*\| "`
          echo ""
-         echo "Fetching all..."
          git fetch --all
          for remote in ${remotes[*]}; do
+            echo "Trying to Merge all branches..."
             for branch in ${branches[*]}; do
-               echo "Trying to Merge $branch..."
-               git merge $remote/$branch
+               echo "   Merging $branch..."
+               git merge "$remote/$branch"
             done
             echo ""
             echo "Trying to Push all branches from $CurDir to: $remote"
             git push $remote --all
+            echo "Trying to Push all branches' tags"
             git push $remote --tags
          done
       fi
@@ -181,4 +182,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###): 244891e4216af7a3da866d58ced68a0d
+###md5 (less lines with ###): 363ae759a4e3da1ac3a3bf94c7a5c22e
