@@ -23,10 +23,14 @@ Version Notes
 - 0.2.11 - Exits are for suckers!
 - 0.2.12 - Fixed the update/crc check; move to consider a 1.0.0 release
 - 1.0.0  - So the main features are all in... But there's always something :P
+- 1.0.0  - Good Idea: Update working, Bad idea: Update smashing numbers together for compares
+
 
 Issues
 ------
 - **DO NOT MANUALLY MODIFY YOUR .GIT/CONFIG FILE!** CATT will 'best guess' as to how you mangled your remotes, but it's best left to git to bit 
 twiddle.
+- Oh ... and don't go over 9000! (and 999); the comparision of versions has a max of 9999.9999.9999
+
 
 ![You know you want to ...](CATT.jpg)

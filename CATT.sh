@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="1.0.0"
+Version="1.0.1"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -93,8 +93,8 @@ if [[ "$1" == "--update" ]];then
       lastVers="$Version"
       newVers=`cat /tmp/junk$ToolName | grep "Version=" | grep -v "cat" | tr "\"" "\n" | grep "\."`
 
-      lastVersHack=`echo "9$lastVers" | tr -d "."`  #LEADING ZERO HACK!
-      newVersHack=`echo "9$newVers" | tr -d "."`  #LEADING ZERO HACK!
+      lastVersHack=`echo "$lastVers" | tr "." " " | awk '{printf("9%04d%04d%04d",$1,$2,$3)}'`
+      newVersHack=`echo "$newVers" | tr "." " " | awk '{printf("9%04d%04d%04d",$1,$2,$3)}'`
 
       echo ""
       if [[ "$lastVersHack" -lt "$newVersHack" ]]; then
@@ -208,4 +208,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###):  5e299096b04fc06cd78486ea79c527df
+###md5 (less lines with ###):  7ac77e79ff19194b3a5eec18a5b4155a
