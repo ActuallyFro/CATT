@@ -179,7 +179,7 @@ for CurDir in ${folders[*]}; do
    fi
 
    if [[ "$CancelledCommit" == "false" ]] && [[ "`echo $Status | grep "Not a git repository"`" == "" ]];then
-      remotes=`cat .git/config | grep "remote =" | tr -d "\t"| cat .git/config | grep "remote =" | tr -d '\t'| cat .git/config | grep "remote =" | tr -d "\t" | tr -d " " | tr "=" "\n" | grep -v remote`
+      remotes=`cat .git/config | grep -v "remotes" | grep "remote" | tr -d "\t" | tr -d " \|\[\|\]" | tr "=" "\n" | tr "\"" "\n" | grep -v remote | grep -v '^$' | sort | uniq`
 
       if [[ "$remotes" == "" ]]; then
          echo ""
@@ -208,4 +208,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###):  5354682747e00fc8b3320290cc490af4
+###md5 (less lines with ###):  d391e59cae61127dc0d46efece2dc980
