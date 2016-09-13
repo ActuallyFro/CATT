@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.9"
+Version="0.2.10"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -100,11 +100,15 @@ if [[ "$1" == "--update" ]];then
          echo "Updating $ToolName to $newVers"
          chmod +x /tmp/junk$ToolName
 
+         echo "Checking the CRC..."
          CheckCRC=`/tmp/junk$ToolName --check-script | grep "good" | wc -l`
          if [[ "$CheckCRC" == "1" ]]; then
+            echo "Installing ..."
             /tmp/junk$ToolName --install
          else
             echo "ERROR! The CRC failed, considering file to be bad!"
+            rm /tmp/junk$ToolName
+            exit
          fi
          rm /tmp/junk$ToolName
       else
@@ -173,7 +177,7 @@ for CurDir in ${folders[*]}; do
    fi
 
    if [[ "$CancelledCommit" == "false" ]] && [[ "`echo $Status | grep "Not a git repository"`" == "" ]];then
-      remotes=`cat .git/config | grep remote | grep "\[" | tr " " "\n" | grep "\]" | tr -d "\"\|\]"`
+      remotes=`cat .git/config | grep "remote =" | tr -d "\t"| cat .git/config | grep "remote =" | tr -d '\t'| cat .git/config | grep "remote =" | tr -d "\t" | tr -d " " | tr "=" "\n" | grep -v remote`
 
       if [[ "$remotes" == "" ]]; then
          echo ""
@@ -202,4 +206,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###): 875f55fe7bc66f3071c5834c1793604a
+###md5 (less lines with ###): b962e599ba915c38a7b7b4ada28c50e5
