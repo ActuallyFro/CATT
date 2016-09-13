@@ -16,5 +16,8 @@ Version Notes
 - 0.2.4 - Decided to push/fetch* all; not just master
 - 0.2.5 - Branches!
 - 0.2.6 - Formatting and book-keeping
+- 0.2.7 - ?????
+- 0.2.8 - PROFIT!
+- 0.2.9 - Terrible Checking of file contents (but it works!)
 
 ![You know you want to ...](CATT.jpg)

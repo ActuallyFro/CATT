@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.8"
+Version="0.2.9"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -53,6 +53,20 @@ if [[ "$1" == "--version" ]];then
    exit
 fi
 
+if [[ "$1" == "--check-script" ]] || [[ "$1" == "--crc" ]];then
+   CRCRan=`$0 --version | grep "md5" | tr ":" "\n" | grep -v "md5" | tr -d " "`
+   CRCScript=`cat $0 | grep "less lines" | grep -v "md5sum" | grep -v "cat" | tr ":" "\n" | grep -v "md5" | tr -d " "`
+
+   if [[ "$CRCRan" == "$CRCScript" ]]; then
+      echo "$0 is good!"
+   else
+      echo "The checksums didn't match!"
+      echo "1. $CRCRan  (vs.)"
+      echo "2. $CRCScript"
+
+   fi
+fi
+
 if [[ "$1" == "--license" ]];then
    echo ""
    echo "$License"
@@ -85,7 +99,13 @@ if [[ "$1" == "--update" ]];then
       if [[ "$lastVersHack" -lt "$newVersHack" ]]; then
          echo "Updating $ToolName to $newVers"
          chmod +x /tmp/junk$ToolName
-         /tmp/junk$ToolName --install
+
+         CheckCRC=`/tmp/junk$ToolName --check-script | grep "good" | wc -l`
+         if [[ "$CheckCRC" == "1" ]]; then
+            /tmp/junk$ToolName --install
+         else
+            echo "ERROR! The CRC failed, considering file to be bad!"
+         fi
          rm /tmp/junk$ToolName
       else
          echo "You are up to date! ($lastVers)"
@@ -182,4 +202,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###): 363ae759a4e3da1ac3a3bf94c7a5c22e
+###md5 (less lines with ###): 875f55fe7bc66f3071c5834c1793604a
