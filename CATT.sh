@@ -179,7 +179,7 @@ for CurDir in ${folders[*]}; do
    fi
 
    if [[ "$CancelledCommit" == "false" ]] && [[ "`echo $Status | grep "Not a git repository"`" == "" ]];then
-      remotes=`cat .git/config | grep -v "remotes" | grep "remote" | tr -d "\t" | tr -d " \|\[\|\]" | tr "=" "\n" | tr "\"" "\n" | grep -v remote | grep -v '^$' | sort | uniq`
+      remotes=`cat .git/config | sed 's/remotes/remotes=/g' | grep "remote" | tr -d "\t" | tr -d " \|\[\|\]\|\\\|\*" | tr "=" "\n" | tr "\"" "\n" | grep -v "remote\|fetch" | tr "/" "\n" | grep -v '^$' | sort | uniq`
 
       if [[ "$remotes" == "" ]]; then
          echo ""
