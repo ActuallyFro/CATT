@@ -22,5 +22,11 @@ Version Notes
 - 0.2.10 - Verifying CRC with --install; fixing issues with mis-matched names/remotes
 - 0.2.11 - Exits are for suckers!
 - 0.2.12 - Fixed the update/crc check; move to consider a 1.0.0 release
+- 1.0.0  - So the main features are all in... But there's always something :P
+
+Issues
+------
+- **DO NOT MANUALLY MODIFY YOUR .GIT/CONFIG FILE!** CATT will 'best guess' as to how you mangled your remotes, but it's best left to git to bit 
+twiddle.
 
 ![You know you want to ...](CATT.jpg)
