@@ -21,5 +21,6 @@ Version Notes
 - 0.2.9  - Terrible Checking of file contents (but it works!)
 - 0.2.10 - Verifying CRC with --install; fixing issues with mis-matched names/remotes
 - 0.2.11 - Exits are for suckers!
+- 0.2.12 - Fixed the update/crc check; move to consider a 1.0.0 release
 
 ![You know you want to ...](CATT.jpg)
