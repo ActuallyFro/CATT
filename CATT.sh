@@ -1,6 +1,6 @@
 #!/bin/bash
 ToolName="CATT"
-Version="0.2.10"
+Version="0.2.11"
 url="https://raw.githubusercontent.com/ActuallyFro/CATT/master/CATT.sh"
 
 read -d '' HelpMessage << EOF
@@ -65,6 +65,7 @@ if [[ "$1" == "--check-script" ]] || [[ "$1" == "--crc" ]];then
       echo "2. $CRCScript"
 
    fi
+   exit
 fi
 
 if [[ "$1" == "--license" ]];then
@@ -101,16 +102,18 @@ if [[ "$1" == "--update" ]];then
          chmod +x /tmp/junk$ToolName
 
          echo "Checking the CRC..."
-         CheckCRC=`/tmp/junk$ToolName --check-script | grep "good" | wc -l`
+         /tmp/junk$ToolName --check-script > /tmp/junk$ToolName.crc
+         CheckCRC=`cat /tmp/junk$ToolName.crc | grep "good" | wc -l`
+
          if [[ "$CheckCRC" == "1" ]]; then
             echo "Installing ..."
             /tmp/junk$ToolName --install
          else
             echo "ERROR! The CRC failed, considering file to be bad!"
-            rm /tmp/junk$ToolName
+            rm /tmp/junk$ToolName*
             exit
          fi
-         rm /tmp/junk$ToolName
+         rm /tmp/junk$ToolName*
       else
          echo "You are up to date! ($lastVers)"
       fi

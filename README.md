@@ -20,5 +20,6 @@ Version Notes
 - 0.2.8  - PROFIT!
 - 0.2.9  - Terrible Checking of file contents (but it works!)
 - 0.2.10 - Verifying CRC with --install; fixing issues with mis-matched names/remotes
+- 0.2.11 - Exits are for suckers!
 
 ![You know you want to ...](CATT.jpg)
