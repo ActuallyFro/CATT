@@ -191,7 +191,7 @@ for CurDir in ${folders[*]}; do
          for remote in ${remotes[*]}; do
             echo "Trying to Merge all branches..."
             for branch in ${branches[*]}; do
-               echo "   Merging $branch..."
+               echo "   Merging: $remote/$branch"
                git merge "$remote/$branch"
             done
             echo ""
@@ -208,4 +208,4 @@ for CurDir in ${folders[*]}; do
    echo ""
 done
 
-###md5 (less lines with ###):  d391e59cae61127dc0d46efece2dc980
+###md5 (less lines with ###):  510941b00969dc9d64860218c466754e
