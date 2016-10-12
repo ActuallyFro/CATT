@@ -140,7 +140,7 @@ if [[ "$1" == "--install" ]];then
    exit
 fi
 
-folders=`find -maxdepth 1 -type d | tr "/" "\n" | grep -v "\." | sort`
+folders=`find . -maxdepth 1 -type d | tr "/" "\n" | grep -v "\." | sort`
 
 for CurDir in ${folders[*]}; do
 
